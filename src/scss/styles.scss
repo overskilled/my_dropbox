@@ -1,0 +1,84 @@
+@import "variables";
+
+body {
+    font-family: $body-font-family;
+    font-size: $base-font-size;
+    line-height: $base-line-height;
+    color: $base-color;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: $heading-font-family;
+}
+
+.wrapper-home {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+}
+
+.sidebar {
+    background-color: $sidebar-bg;
+    flex-grow: 0.3;
+}
+
+.appcontent {
+    background-color: $content-bg;
+    flex-grow: 3;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20%;
+}
+
+.navigation {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    padding: 3%;
+}
+
+
+.file-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    /* Add margin to separate the table from other content */
+
+    th,
+    td {
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+        /* Add border between rows */
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+        /* Light gray background for table headers */
+        font-weight: bold;
+    }
+
+    tr:hover {
+        background-color: #f5f5f5;
+        /* Light gray background on hover */
+    }
+
+    /* Style the first column (Name) to truncate long text */
+    td:first-child {
+        max-width: 200px;
+        /* Maximum width of the Name column */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        /* Add ellipsis for overflow text */
+        white-space: nowrap;
+        /* Prevent text wrapping */
+    }
+}
