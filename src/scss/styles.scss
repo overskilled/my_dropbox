@@ -1,5 +1,8 @@
 @import "variables";
 
+//Import bootstrap
+@import '~bootstrap/scss/bootstrap';
+
 body {
     font-family: $body-font-family;
     font-size: $base-font-size;
@@ -47,27 +50,30 @@ h6 {
 
 
 .file-table {
-    width: 100%;
+    width: 75%;
     border-collapse: collapse;
-    margin-top: 20px;
-    /* Add margin to separate the table from other content */
+    flex: 0.5;
 
     th,
     td {
-        padding: 8px;
-        border-bottom: 1px solid #ddd;
+        padding: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.466);
         /* Add border between rows */
         text-align: left;
     }
 
     th {
-        background-color: #f2f2f2;
+        background-color: $content-bg;
         /* Light gray background for table headers */
         font-weight: bold;
+
+        &:first-child {
+            flex-grow: 4;
+        }
     }
 
     tr:hover {
-        background-color: #f5f5f5;
+        background-color: $sidebar-bg;
         /* Light gray background on hover */
     }
 
@@ -80,5 +86,39 @@ h6 {
         /* Add ellipsis for overflow text */
         white-space: nowrap;
         /* Prevent text wrapping */
+    }
+}
+
+.content-table {
+    width: 100%;
+    /* Set width of the container */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.form-btn {
+    border: transparent;
+}
+
+.btns {
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+    margin-top: 2%;
+    margin-left: 15%;
+    margin-bottom: 5%;
+
+    .upload-btn {
+        padding: 30px;
+        background-color: $theme-color;
+        border: transparent;
+        transition: background-color 0.3s ease; // Smooth transition for background color change
+
+        &:hover {
+            background-color: darken($theme-color, 10%); // Darken the background color on hover
+            cursor: pointer; // Change cursor to pointer on hover
+        }
     }
 }
