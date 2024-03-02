@@ -33,7 +33,7 @@ const AppContent = () => {
 
 
     return (
-        <div className='appcontent'>
+        <div className='container  appcontent'>
 
             <div className="btns"><input type="file" id="fileInput" onChange={handleFileSelect} style={{ display: 'none' }} />
 
@@ -43,12 +43,15 @@ const AppContent = () => {
                         <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1" />
                     </svg>
                     Upload File</button>
+
+
             </div>
-
-
-            <div className="content-table">
+            <div className="wrapper-table ml-5">
+                <h3>Tous les fichiers</h3>
                 <FileTable />
             </div>
+
+
 
         </div>
     )

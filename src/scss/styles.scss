@@ -27,12 +27,12 @@ h6 {
 
 .sidebar {
     background-color: $sidebar-bg;
-    flex-grow: 0.3;
+    flex-grow: 1;
 }
 
 .appcontent {
     background-color: $content-bg;
-    flex-grow: 3;
+    flex-grow: 1;
 }
 
 .logo {
@@ -106,12 +106,10 @@ h6 {
     display: flex;
     flex-direction: column;
     width: 15%;
-    margin-top: 2%;
-    margin-left: 15%;
-    margin-bottom: 5%;
+    margin: 5%;
 
     .upload-btn {
-        padding: 30px;
+        padding: 20px;
         background-color: $theme-color;
         border: transparent;
         transition: background-color 0.3s ease; // Smooth transition for background color change
@@ -122,3 +120,11 @@ h6 {
         }
     }
 }
+
+.wrapper-table {
+    margin: 5%;
+}
+
+
+
+//due to login 

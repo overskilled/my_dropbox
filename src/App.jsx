@@ -5,9 +5,11 @@ import { Suspense } from 'react';
 
 
 
+
 //pages 
 const Home = React.lazy(() => import("./pages/Home/Home"))
 const Profile = React.lazy(() => import("./pages/Profile/Profile"))
+const Auth = React.lazy(() => import("./pages/Auth/Auth"))
 
 function App() {
   const loading = (
@@ -22,6 +24,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path='/auth' element={<Auth />} />
         </Routes>
       </Suspense>
     </Router>
