@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { ref, listAll, getMetadata, deleteObject } from 'firebase/storage'; // Import Firebase Storage methods
+import { ref, listAll, getMetadata, deleteObject, updateMetadata } from 'firebase/storage'; // Import Firebase Storage methods
 import { storage } from '../firebase/config';
 
 const FileTable = () => {
     const [files, setFiles] = useState([]);
     const [editedName, setEditedName] = useState('');
+    const [updateInfo, setUpdateInfo] = useState({})
 
     useEffect(() => {
         const fetchFiles = async () => {
@@ -71,23 +72,30 @@ const FileTable = () => {
     };
 
     const handleSave = (fileId) => {
-        setFiles(files.map(file => {
-            if (file.id === fileId) {
-                return { ...file, isEditing: false, name: file.editedName };
-            } else {
-                return file;
-            }
-        }));
+
+        const fileRef = ref(storage, fileId)
+
+        console.log("user update info:", fileId)
+        // Create file metadata to update
+        const newMetadata = {
+            name: updateInfo.nom
+        };
+
+
+
+        // Update metadata properties
+        updateMetadata(fileRef, newMetadata)
+            .then((metadata) => {
+                alert("Name Successfully updateD", metadata);
+            }).catch((error) => {
+                alert("Oups something went wrong");
+            });
     };
 
-    const handleInputChange = (fileId, value) => {
-        setFiles(files.map(file => {
-            if (file.id === fileId) {
-                return { ...file, editedName: value };
-            } else {
-                return file;
-            }
-        }));
+    const handleInputChange = (e) => {
+        e.preventDefault();
+        setUpdateInfo({ ...updateInfo, [e.target.name]: e.target.value });
+        console.log(updateInfo)
     };
 
     // Function to handle file deletion
@@ -124,7 +132,8 @@ const FileTable = () => {
                                     type="text"
                                     placeholder={file.name}
                                     value={file.editedName}
-                                    onChange={(e) => handleInputChange(file.id, e.target.value)}
+                                    name='nom'
+                                    onChange={(e) => {handleInputChange(e)}}
                                 />
                             ) : (
                                 <span>{file.name}</span> // Use a span instead of input when not editing

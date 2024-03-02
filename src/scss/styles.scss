@@ -27,12 +27,12 @@ h6 {
 
 .sidebar {
     background-color: $sidebar-bg;
-    flex-grow: 1;
+    flex: 1;
 }
 
 .appcontent {
     background-color: $content-bg;
-    flex-grow: 1;
+    flex: 4;
 }
 
 .logo {
@@ -44,7 +44,7 @@ h6 {
 .navigation {
     display: flex;
     justify-content: center;
-    gap: 5px;
+    gap: 3px;
     padding: 3%;
 }
 
