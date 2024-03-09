@@ -2,6 +2,10 @@ import React, { useState } from 'react'
 import { auth } from '../../firebase/config';
 import { sendPasswordResetEmail, signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import GoogleButton from 'react-google-button';
+import { googleSignIn, handleGoogleSignIn, login } from "../../functions/authFunction";
+import './Login.module.scss';
+
 
 const Login = () => {
     const navigate = useNavigate();
@@ -52,6 +56,16 @@ const Login = () => {
         return <p>Loading...</p>; // Display a loading state while logging in
     }
 
+    const handleGoogleSignIn = async (e) => {
+        e.preventDefault();
+        try {
+            await googleSignIn();
+            navigate("/home");
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+
 
 
 
@@ -74,7 +88,13 @@ const Login = () => {
                     onChange={handleLoginCredentialsChange}
                 />
                 <a href="#" onClick={handlePasswordReset}>Forgot your password?</a>
-                <button>Sign In</button>
+                <button className='auth-btn'>Sign In</button>
+                <br />
+                <GoogleButton
+                    className="g-btn"
+                    type="dark"
+                    onClick={handleGoogleSignIn}
+                />
             </form>
         </div>
     );

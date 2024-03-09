@@ -1,4 +1,5 @@
 import React from 'react'
+import './Sidebar.module.scss'
 
 const SideBar = () => {
     return (

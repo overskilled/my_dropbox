@@ -1,72 +1,45 @@
 import React, { useState } from 'react'
-import { auth } from '../../firebase/config';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import { signUp } from '../../functions/authFunction';
+import './Signup.module.scss'
 
 const Signup = () => {
-    const navigate = useNavigate();
+    const [email, setEmail] = useState("");
+    const [error, setError] = useState("");
+    const [password, setPassword] = useState("");
+    let navigate = useNavigate();
 
-    // State for signup form
-    const [signupCredentials, setSignupCredentials] = useState({ email: '', password: '' });
-    const [signupError, setSignupError] = useState('')
-
-    const handleSignupCredentialsChange = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        setSignupCredentials({ ...signupCredentials, [e.target.name]: e.target.value });
-        console.log(signupCredentials);
+        setError("");
+        try {
+            await signUp(email, password);
+            navigate("/home");
+        } catch (err) {
+            setError(err.message);
+        }
+
+
+        return (
+            <div className="form-container sign-up-container">
+                <form >
+                    <h1 style={{ color: "black" }}>Create Account</h1>
+                    <input
+                        type="email"
+                        name="email"
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Email"
+                    />
+                    <input
+                        type="password"
+                        name="password"
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Password"
+                    />
+                    <button onClick={(e) => {handleSubmit(e)}}>Sign Up</button>
+                </form>
+            </div>
+        );
     }
-
-    const handleSignup = (e) => {
-        e.preventDefault();
-        createUserWithEmailAndPassword(auth, signupCredentials.email, signupCredentials.password)
-            .then((usersCredential) => {
-                // Signed up 
-                const user = usersCredential.user;
-                console.log("User:", user);
-                alert("Welcome to my dropbox");
-
-                console.log("UserCredentials:", user);
-                navigate('/')
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log("Wrong Signup credentials")
-            });
-
-    }
-
-
-    return (
-        <div className="form-container sign-up-container">
-            <form onSubmit={handleSignup}>
-                <h1 style={{ color: "black"}}>Create Account</h1>
-                
-                <input
-                    type="text"
-                    name="name"
-                    value={signupCredentials.name}
-                    onChange={handleSignupCredentialsChange}
-                    placeholder="Name"
-                />
-                <input
-                    type="email"
-                    name="email"
-                    value={signupCredentials.email}
-                    onChange={handleSignupCredentialsChange}
-                    placeholder="Email"
-                />
-                <input
-                    type="password"
-                    name="password"
-                    value={signupCredentials.password}
-                    onChange={handleSignupCredentialsChange}
-                    placeholder="Password"
-                />
-                <button>Sign Up</button>
-            </form>
-        </div>
-    );
 }
-
-export default Signup;
+    export default Signup;

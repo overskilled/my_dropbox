@@ -3,19 +3,20 @@ import Login from '../Login/Login';
 import Signup from '../Signup/Signup';
 import "./Auth.scss";
 
-const Auth = () => {
+function Auth() {
     const [type, setType] = useState("signIn");
     const handleOnClick = text => {
         if (text !== type) {
             setType(text);
+            console.log(text)
             return;
         }
     };
-    const containerClass =
-        "container " + (type === "signUp" ? "right-panel-active" : "");
+    const containerClass = "container " + (type === "signUp" ? "right-panel-active" : "");
+    console.log(containerClass)
     return (
         <div className="App">
-            <h2 style={{ color: "black"}}>Sign in/up Form</h2>
+            <h2>Sign in/up Form</h2>
             <div className={containerClass} id="container">
                 <Signup />
                 <Login />
@@ -27,7 +28,7 @@ const Auth = () => {
                                 To keep connected with us please login with your personal info
                             </p>
                             <button
-                                className="ghost"
+                                className="auth-btn"
                                 id="signIn"
                                 onClick={() => handleOnClick("signIn")}
                             >
@@ -38,7 +39,7 @@ const Auth = () => {
                             <h1>Hello, Friend!</h1>
                             <p>Enter your personal details and start journey with us</p>
                             <button
-                                className="ghost "
+                                className="auth-btn "
                                 id="signUp"
                                 onClick={() => handleOnClick("signUp")}
                             >
@@ -51,5 +52,6 @@ const Auth = () => {
         </div>
     );
 }
+
 
 export default Auth;

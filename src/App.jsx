@@ -1,10 +1,6 @@
 import React from 'react';
-import './scss/styles.scss';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Suspense } from 'react';
-
-
-
 
 //pages 
 const Home = React.lazy(() => import("./pages/Home/Home"))
@@ -19,15 +15,15 @@ function App() {
   )
 
   return (
-    <Router>
-      <Suspense fallback={loading}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path='/auth' element={<Auth />} />
-        </Routes>
-      </Suspense>
-    </Router>
+      <Router>
+        <Suspense fallback={loading}>
+          <Routes>
+            <Route path="/home" element={ <Home /> } />
+            <Route path="/profile" element={<Profile />} />
+            <Route path='/' element={<Auth />} />
+          </Routes>
+        </Suspense>
+      </Router>
   );
 }
 
